@@ -1,54 +1,59 @@
-# SSP-ID-BACKEND
+# BOOK MANAGEMENT API
 
 Welcome to my project **ssp-id-backend**! 🎉
 
 ## About this project
+## Tentang Proyek Ini
 
-**Nama Proyek Anda** adalah [jenis proyek] yang bertujuan untuk [tujuan utama proyek]. Dibangun dengan [teknologi/kerangka kerja utama], proyek ini dirancang untuk [menyelesaikan masalah X, meningkatkan proses Y, atau memberikan fitur Z]. Kami berkomitmen untuk menciptakan sesuatu yang [deskriptif sifat proyek, misal: cepat, andal, mudah digunakan] dan berharap dapat memberikan kontribusi yang berharga bagi komunitas [komunitas pengguna yang relevan].
+**ssp-id-backend** is a backend API that allows you to manage book data efficiently. Built with Java Spring Boot and using SQL as the database, this API offers various features to add, delete, update and manage book data. The project also includes a secure authentication system with Bearer Authentication using access tokens and refresh tokens.
 
-## Fitur Utama
+## Main Fiture
 
-- 🚀 **Fitur 1**: Jelaskan fitur utama pertama dan manfaatnya.
-- ⚡ **Fitur 2**: Jelaskan fitur utama kedua dan manfaatnya.
-- 🔒 **Fitur 3**: Jelaskan fitur utama ketiga dan manfaatnya.
+- 📖 **Book Data Registration**: Add, delete and update book data easily.
+- 👥 **User Management**: Create and manage users who can access the API.
+- 🗂️ **Book Categories**: Organize books by category for more structured management.
+- 🚛 **Book Supplier**: Manage book supplier data.
+- 🔐 **Login and Logout**: Secure authentication system using Bearer Authentication with access token and refresh token
 
-## Demo
+## Model Entitys Structur
 
-Lihat bagaimana **Nama Proyek Anda** bekerja dengan [link ke demo, video, atau screenshot].
+- **User**: Manages user data that has access to the API.
+- **Book Products**: Manage book data including title, author, price, etc.
+- **Book Categories**: Manage book categories for grouping.
+- **Book Supplier**: Manage book supplier data.
 
-## Instalasi
+## Teknology Used
 
-Ikuti langkah-langkah di bawah ini untuk menginstal dan menjalankan proyek ini di lingkungan lokal Anda.
+- **Java Spring Boot**: The main framework for application development.
+- **SQL Database**: Reliable and structured data storage.
+- **Bearer Authentication**: For a secure authentication system.
 
-1. **Clone repo ini**:
+## Installation
+
+Follow the steps below to install and run this project in your local environment.
+
+1. **Clone this repo**:
     ```sh
-    git clone https://github.com/username/namaproject.git
+    git clone https://github.com/username/book-management-api.git
     ```
-2. **Masuk ke direktori proyek**:
+2. **Go to project Directory**:
     ```sh
-    cd namaproject
+    cd ssp-id-backend
     ```
-3. **Instal dependensi**:
+3. **Install Dependency**:
     ```sh
-    npm install
+    ./mvnw clean install -DskipTest
     ```
-4. **Jalankan proyek**:
+4. **Database Configuration**:
+   Make sure you have setup your SQL database and updated `application.properties` with the correct database credentials.
+6. **Run App**:
     ```sh
-    npm start
+    ./mvnw spring-boot:run -DskipTest
     ```
-
-## Kontribusi
-
-Kami sangat mengapresiasi kontribusi dari komunitas! Jika Anda tertarik untuk berkontribusi, silakan baca [CONTRIBUTING.md](link ke CONTRIBUTING.md) untuk memulai.
-
-## License
-
-Proyek ini dilisensikan di bawah lisensi [Nama Lisensi]. Lihat file [LICENSE](link ke LICENSE) untuk informasi lebih lanjut.
-
+    
 ## Kontak
 
-Jika Anda memiliki pertanyaan atau umpan balik, jangan ragu untuk menghubungi kami melalui [email/contact form/link lain]. 
+If you have any questions or feedback, please feel free to contact us via [hajrulahmad689@gmail.com].
 
 ---
-
-Terima kasih telah mengunjungi proyek kami! Kami berharap Anda menemukan **Nama Proyek Anda** berguna dan menyenangkan untuk digunakan. Jangan lupa untuk memberikan bintang ⭐ jika Anda menyukai proyek ini!
+Thank you for visiting our project! We hope you find the **Book Management API** useful and easy to use. Don't forget to give a ⭐ star if you like this project!
