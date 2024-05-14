@@ -49,7 +49,6 @@ public class AuthenticationService {
         if(userExist) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "email already exist");
         }
-
         User user = new User();
         user.setId(UUID.randomUUID().toString());
         user.setFirstName(request.getFirstName());
@@ -124,7 +123,6 @@ public class AuthenticationService {
                 token.setLoggedOut(true);
             });
         }
-
         tokenRepository.saveAll(tokenList);
     }
 
