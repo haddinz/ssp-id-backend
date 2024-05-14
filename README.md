@@ -2,7 +2,6 @@
 
 Welcome to my project **ssp-id-backend**! 🎉
 
-## About this project
 ## Tentang Proyek Ini
 
 **ssp-id-backend** is a backend API that allows you to manage book data efficiently. Built with Java Spring Boot and using SQL as the database, this API offers various features to add, delete, update and manage book data. The project also includes a secure authentication system with Bearer Authentication using access tokens and refresh tokens.
@@ -51,7 +50,7 @@ Follow the steps below to install and run this project in your local environment
     ./mvnw spring-boot:run -DskipTest
     ```
     
-## Kontak
+## Contact
 
 If you have any questions or feedback, please feel free to contact us via [hajrulahmad689@gmail.com].
 
