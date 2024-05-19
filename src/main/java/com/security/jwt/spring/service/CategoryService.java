@@ -5,12 +5,14 @@ import com.security.jwt.spring.dto.request.CategoryUpdateReq;
 import com.security.jwt.spring.dto.response.CategoryResponse;
 import com.security.jwt.spring.models.entity.Category;
 import com.security.jwt.spring.models.repository.CategoryRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -45,12 +47,34 @@ public class CategoryService {
         validationService.validation(dto);
 
         Category category = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "category not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "category not found"));
 
+        category.setId(dto.getId());
         category.setName(dto.getName());
         categoryRepository.save(category);
 
         return categoryResponse(category);
+    }
+
+    @Transactional(readOnly = true)
+    public List<CategoryResponse> findAll() {
+        List<Category> categoryList = categoryRepository.findAll();
+        return categoryList.stream().map(this::categoryResponse).toList();
+    }
+
+    @Transactional(readOnly = true)
+    public CategoryResponse findOne(String categoryId) {
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "category not found"));
+        return categoryResponse(category);
+    }
+
+    @Transactional
+    public void remove(String categoryId) {
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "category not found"));
+
+        categoryRepository.delete(category);
     }
 
     private CategoryResponse categoryResponse(Category category) {

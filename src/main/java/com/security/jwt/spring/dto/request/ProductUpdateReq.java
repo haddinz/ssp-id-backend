@@ -8,12 +8,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class CategoryUpdateReq {
+public class ProductUpdateReq {
     @JsonIgnore
     @NotBlank
     private String id;
     private String name;
+    private Integer quantity;
+    private String description;
+    private double price;
 }

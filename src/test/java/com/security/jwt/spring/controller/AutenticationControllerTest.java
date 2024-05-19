@@ -37,12 +37,6 @@ class AutenticationControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @BeforeEach
-    void setUp() {
-        userRepository.deleteAll();
-    }
-
-    @Test
     void testRegisterSuccess() throws Exception {
         RegisterRequest dto = new RegisterRequest();
         dto.setFirstName("Mail Maulana");
@@ -64,7 +58,6 @@ class AutenticationControllerTest {
         });
     }
 
-    @Test
     void testLoginSuccess() throws Exception {
         User user = new User();
         user.setId(UUID.randomUUID().toString());

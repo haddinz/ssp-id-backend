@@ -15,14 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/auth")
 public class AutenticationController {
 
     @Autowired
     private AuthenticationService authenticationService;
 
     @PostMapping(
-            path = "/register",
+            path = "/api/auth/register",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -32,7 +31,7 @@ public class AutenticationController {
     }
 
     @PostMapping(
-            path = "/login",
+            path = "/api/auth/login",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -42,9 +41,7 @@ public class AutenticationController {
     }
 
     @PostMapping(
-            path = "/refresh_token",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE
+            path = "/api/auth/refresh_token"
     )
     public WebResponse<AuthenticationResponse> refreshToken(HttpServletRequest request, HttpServletResponse response) {
         AuthenticationResponse authenticationResponse = authenticationService.refreshToken(request, response);

@@ -9,15 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/admin")
 public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
 
     @PostMapping(
-            path = "/category",
+            path = "/api/admin/category",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -28,8 +29,8 @@ public class CategoryController {
                 .build();
     }
 
-    @PostMapping(
-            path = "/category/{categoryId}",
+    @PutMapping(
+            path = "/api/admin/category/{categoryId}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -39,6 +40,40 @@ public class CategoryController {
         CategoryResponse categoryResponse = categoryService.update(categoryId, dto);
         return WebResponse.<CategoryResponse>builder()
                 .data(categoryResponse)
+                .build();
+    }
+
+    @GetMapping(
+            path = "/api/category/findAll",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public WebResponse<List<CategoryResponse>> findAll() {
+        List<CategoryResponse> categoryResponse = categoryService.findAll();
+        return WebResponse.<List<CategoryResponse>>builder()
+                .data(categoryResponse)
+                .build();
+    }
+
+    @GetMapping(
+            path = "/api/admin/category/{categoryId}",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public WebResponse<CategoryResponse> findOne(@PathVariable("categoryId") String categoryId) {
+        CategoryResponse categoryResponse = categoryService.findOne(categoryId);
+        return WebResponse.<CategoryResponse>builder()
+                .data(categoryResponse)
+                .build();
+    }
+
+    @DeleteMapping(
+            path = "/api/admin/category/{categoryId}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public WebResponse<String> remove(@PathVariable("categoryId") String categoryId) {
+        categoryService.remove(categoryId);
+        return WebResponse.<String>builder()
+                .data("remove category successfully")
                 .build();
     }
 }

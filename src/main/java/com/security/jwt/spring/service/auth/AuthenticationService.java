@@ -68,6 +68,7 @@ public class AuthenticationService {
         return authenticationResponse(accessToken, refreshToken, "register successfully");
     }
 
+    @Transactional
     public AuthenticationResponse authenticate(LoginRequest request) {
         boolean userExist = userRepository.findByEmail(request.getEmail()).isPresent();
         if(!userExist) {
@@ -91,6 +92,7 @@ public class AuthenticationService {
         return authenticationResponse(accessToken, refreshToken, "authenticate successfully");
     }
 
+    @Transactional
     public AuthenticationResponse refreshToken(HttpServletRequest request, HttpServletResponse response) {
         String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         if(authHeader == null || !authHeader.startsWith("Bearer ")) {
@@ -157,6 +159,22 @@ public class AuthenticationService {
             user.setPassword(passwordEncoder.encode("admin"));
             user.setEmail("admin@gmail.com");
             user.setRole(Role.ADMIN);
+            userRepository.save(user);
+        }
+    }
+
+    @PostConstruct
+    public void createSampleUserAccount() {
+        User findSampleUser = userRepository.findByRole(Role.USER);
+        if(findSampleUser == null) {
+            User user = new User();
+            user.setId(UUID.randomUUID().toString());
+            user.setFirstName("Example");
+            user.setLastName("User");
+            user.setUsername("@user");
+            user.setPassword(passwordEncoder.encode("user"));
+            user.setEmail("user@gmail.com");
+            user.setRole(Role.USER);
             userRepository.save(user);
         }
     }

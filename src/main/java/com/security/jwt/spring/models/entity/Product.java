@@ -19,7 +19,10 @@ public class Product {
     @Column(name = "name_product" ,nullable = false, length = 100)
     private String name;
 
-    @Column(name = "description_product" ,nullable = false, length = 100)
+    @Column(name = "quantity_product" ,nullable = false, length = 100)
+    private Integer quantity;
+
+    @Column(name = "description_product" ,nullable = false, length = 500)
     private String description;
 
     @Column(name = "price_product" ,nullable = false, length = 100)

@@ -9,8 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class WebResponse<T> {
-    private T data;
-    private String message;
-    private PagingResponse paging;
+public class UserResponse {
+    private String id;
+    private String firstName;
+    private String lastName;
+    private String username;
+    private String email;
 }
