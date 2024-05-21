@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProductCreateReq {
+public class SupplierCreateReq {
     private String name;
-    private Integer quantity;
-    private String description;
-    private double price;
+    private String address;
+    private String email;
 }

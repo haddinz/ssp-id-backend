@@ -1,20 +1,21 @@
 package com.security.jwt.spring.dto.response;
 
-import com.security.jwt.spring.models.entity.Category;
+import com.security.jwt.spring.models.entity.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class ProductResponse {
+public class SupplierResponse {
     private String id;
     private String name;
-    private String description;
-    private Integer quantity;
-    private double price;
-    private Category category;
+    private String address;
+    private String email;
+    private List<Product> productsList;
 }

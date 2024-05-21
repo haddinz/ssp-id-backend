@@ -21,12 +21,12 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping(
-            path = "/api/product/create",
+            path = "/api/product/{categoryId}/create",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public WebResponse<ProductResponse> create(@RequestBody ProductCreateReq dto) {
-        ProductResponse productResponse = productService.create(dto);
+    public WebResponse<ProductResponse> create(@RequestBody ProductCreateReq dto, @PathVariable String categoryId) {
+        ProductResponse productResponse = productService.create(dto, categoryId);
         return WebResponse.<ProductResponse>builder().data(productResponse).message("product created successfully").build();
     }
 
@@ -77,6 +77,7 @@ public class ProductController {
             @RequestParam(value = "name", required = false) String name,
             @RequestParam(value = "minPrice", required = false) String minPrice,
             @RequestParam(value = "maxPrice", required = false) String maxPrice,
+            @RequestParam(value = "category", required = false) String category,
             @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
             @RequestParam(value = "size", required = false, defaultValue = "10") Integer size
     ) {
@@ -84,6 +85,7 @@ public class ProductController {
                 .name(name)
                 .minPrice(minPrice)
                 .maxPrice(maxPrice)
+                .category(category)
                 .page(page)
                 .size(size)
                 .build();

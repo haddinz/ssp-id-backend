@@ -13,18 +13,18 @@ import java.util.List;
 @Table(name = "tbl_supplier")
 public class Supplier {
     @Id
-    @Column(name = "id_supplier",nullable = false, unique = true)
+    @Column(name = "supplier_id",nullable = false, unique = true)
     private String id;
 
-    @Column(name = "name_supplier", nullable = false)
+    @Column(name = "supplier_name", nullable = false)
     private String name;
 
-    @Column(name = "address_supplier", nullable = false)
+    @Column(name = "supplier_address", nullable = false)
     private String address;
 
-    @Column(name = "email_supplier", nullable = false)
+    @Column(name = "supplier_email", nullable = false, unique = true)
     private String email;
 
-    @OneToMany(mappedBy = "supplierSet")
+    @OneToMany(mappedBy = "supplierList")
     private List<Product> productsList;
 }

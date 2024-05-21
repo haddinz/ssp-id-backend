@@ -4,7 +4,9 @@ import com.security.jwt.spring.dto.request.ProductCreateReq;
 import com.security.jwt.spring.dto.request.ProductSearchReq;
 import com.security.jwt.spring.dto.request.ProductUpdateReq;
 import com.security.jwt.spring.dto.response.ProductResponse;
+import com.security.jwt.spring.models.entity.Category;
 import com.security.jwt.spring.models.entity.Product;
+import com.security.jwt.spring.models.repository.CategoryRepository;
 import com.security.jwt.spring.models.repository.ProductRepository;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -27,9 +28,15 @@ public class ProductService {
     @Autowired
     private ValidationService validationService;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @Transactional
-    public ProductResponse create(ProductCreateReq dto) {
+    public ProductResponse create(ProductCreateReq dto, String categoryId) {
         validationService.validation(dto);
+
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "category not found"));
 
         Product product = new Product();
         product.setId(UUID.randomUUID().toString());
@@ -37,7 +44,7 @@ public class ProductService {
         product.setQuantity(dto.getQuantity());
         product.setDescription(dto.getDescription());
         product.setPrice(dto.getPrice());
-        product.setCategory(dto.getCategory());
+        product.setCategory(category);
         productRepository.save(product);
 
         return productResponse(product);
@@ -65,7 +72,6 @@ public class ProductService {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "product not found"));
 
-        product.setId(productId);
         product.setName(dto.getName());
         product.setQuantity(dto.getQuantity());
         product.setDescription(dto.getDescription());
@@ -88,6 +94,10 @@ public class ProductService {
             List<Predicate> predicates = new ArrayList<>();
             if(Objects.nonNull(dto.getName())) {
                 predicates.add(builder.like(root.get("name"), "%"+ dto.getName() +"%"));
+            }
+
+            if(Objects.nonNull(dto.getCategory())) {
+                predicates.add(builder.equal(root.get("category").get("name"), dto.getCategory()));
             }
 
             if(Objects.nonNull(dto.getMinPrice())) {
@@ -117,6 +127,7 @@ public class ProductService {
                 .quantity(product.getQuantity())
                 .description(product.getDescription())
                 .price(product.getPrice())
+                .category(product.getCategory())
                 .build();
     }
 }

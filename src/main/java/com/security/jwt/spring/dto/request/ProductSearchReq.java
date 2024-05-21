@@ -15,6 +15,7 @@ public class ProductSearchReq {
     private String name;
     private String minPrice;
     private String maxPrice;
+    private String category;
 
     @NotNull
     private Integer page;

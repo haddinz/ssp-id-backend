@@ -1,5 +1,6 @@
 package com.security.jwt.spring.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,9 +10,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProductCreateReq {
+public class SupplierUpdateReq {
+    @JsonIgnore
+    private String id;
+
     private String name;
-    private Integer quantity;
-    private String description;
-    private double price;
+    private String address;
+    private String email;
 }

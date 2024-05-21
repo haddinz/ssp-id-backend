@@ -11,9 +11,9 @@ import lombok.*;
 @Table(name = "tbl_category")
 public class Category {
     @Id
-    @Column(name = "id_category",nullable = false, unique = true)
+    @Column(name = "category_id",nullable = false, unique = true)
     private String id;
 
-    @Column(name = "name_category" ,nullable = false, length = 100)
+    @Column(name = "category_name" ,nullable = false, length = 100)
     private String name;
 }
